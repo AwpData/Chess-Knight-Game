@@ -1,7 +1,7 @@
 # Write your code here
 def check(coords):
     for num in coords:
-        if num.isalpha() or len(coords) > 2 or int(num) < 1 or int(num) > 8:
+        if num.isalpha() or len(coords) != 2 or int(num) < 1 or int(num) > 8:
             return False
     return True
 
@@ -9,11 +9,11 @@ def check(coords):
 # just a test below
 print("Enter the knight's starting position")
 coord = input().split()
-x = int(coord[0])
-y = int(coord[1])
 if not check(coord):
     print("Invalid dimensions!")
 else:
+    x = int(coord[0])
+    y = int(coord[1])
     print(" -------------------")
     for i in range(8, 0, -1):
         print(str(i) + "|", end="")
