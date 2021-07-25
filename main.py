@@ -1,9 +1,11 @@
 # Write your code here
 
 class Board:
-    def __init__(self, rows, columns):
+    def __init__(self, rows, columns, curr_x, curr_y):
         self.rows = rows
         self.columns = columns
+        self.curr_x = 0
+        self.curr_y = 0
 
     def draw_board(self, coordinates, x, y):  # coordinates will be a list
         cell_length = len(str(int(self.columns) * int(self.rows)))
@@ -16,7 +18,7 @@ class Board:
                     continue
                 for k in range(0, len(coordinates)):
                     if j == int(coordinates[k][0]) and i == int(coordinates[k][1]):
-                        print(" " * cell_length + "O", end="")
+                        print(" " * cell_length + str(self.check_moves(coordinates[k][0], coordinates[k][1])), end="")
                         break
                 else:
                     print(" {}".format("_" * cell_length), end="")
@@ -48,31 +50,34 @@ class Board:
 
     def get_valid_pos(self, x, y):
         valid_moves = list()
-        if x - 2 > 0 and y + 1 <= self.columns:  # left up
+        if x - 2 > 0 and y + 1 <= self.columns and (x - 2 != self.curr_x or y + 1 != self.curr_y):  # left up
             valid_moves.append([x - 2, y + 1])
-        if x - 2 > 0 and y - 1 >= 1:  # left down
+        if x - 2 > 0 and y - 1 >= 1 and (x - 2 != self.curr_x or y - 1 != self.curr_y):  # left down
             valid_moves.append([x - 2, y - 1])
-        if x + 2 <= self.rows and y + 1 <= self.columns:  # right up
+        if x + 2 <= self.rows and y + 1 <= self.columns and (x + 2 != self.curr_x or y + 1 != self.curr_y):  # right up
             valid_moves.append([x + 2, y + 1])
-        if x + 2 <= self.rows and y - 1 >= 1:  # right down
+        if x + 2 <= self.rows and y - 1 >= 1 and (x + 2 != self.curr_x or y - 1 != self.curr_y):  # right down
             valid_moves.append([x + 2, y - 1])
-        if y + 2 <= self.columns and x - 1 >= 1:  # up left
+        if y + 2 <= self.columns and x - 1 >= 1 and (x - 1 != self.curr_x or y + 2 != self.curr_y):  # up left
             valid_moves.append([x - 1, y + 2])
-        if y + 2 <= self.columns and x + 1 <= self.rows:  # up right
+        if y + 2 <= self.columns and x + 1 <= self.rows and (x + 1 != self.curr_x or y + 2 != self.curr_y):  # up right
             valid_moves.append([x + 1, y + 2])
-        if y - 2 >= 1 and x - 1 >= 1:  # down left
+        if y - 2 >= 1 and x - 1 >= 1 and (x - 1 != self.curr_x or y - 2 != self.curr_y):  # down left
             valid_moves.append([x - 1, y - 2])
-        if y - 2 >= 1 and x + 1 <= self.rows:  # down right
+        if y - 2 >= 1 and x + 1 <= self.rows and (x + 1 != self.curr_x or y - 2 != self.curr_y):  # down right
             valid_moves.append([x + 1, y - 2])
-        self.draw_board(valid_moves, x, y)
+        return valid_moves
+
+    def check_moves(self, x, y):
+        return len(self.get_valid_pos(x, y))
 
 
-board = Board(0, 0)
+board = Board(0, 0, 0, 0)
 print("Enter your board dimensions")
 dim = input().split()
 while True:
     for num in dim:
-        if num.isalpha() or len(dim) != 2 or int(num) < 0:
+        if num.isalpha() or len(dim) != 2 or int(num) < 0 or int(num) > 10:
             print("Invalid dimensions!\n")
             print("Enter your board dimensions")
             dim = input().split()
@@ -88,4 +93,7 @@ coords = input().split()
 if not board.check_coordinates(coords):
     print("Invalid dimensions!")
 else:
-    board.get_valid_pos(int(coords[0]), int(coords[1]))
+    board.curr_x = int(coords[0])
+    board.curr_y = int(coords[1])
+    good_moves = board.get_valid_pos(int(coords[0]), int(coords[1]))
+    board.draw_board(good_moves, int(coords[0]), int(coords[1]))
