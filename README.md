@@ -7,7 +7,7 @@ Knight's Tour Challenge programmed using <a href="https://en.wikipedia.org/wiki/
 <h2> Guide </h2>
 An <b>X</b> denotes the current knight position <br>
 <b>Asterisks (*)</b> denote already visited places <br>
-<b>Numbers</b> denote the possible places you can move
+<b>Numbers</b> denote the possible places you can move and the number of valid spots there are from that place
 
 <h2>Example</h2>
 
