@@ -3,6 +3,7 @@ Knight's Tour Challenge programmed using <a href="https://en.wikipedia.org/wiki/
 <h1> Knight's Tour Challenge </h1>
 <li> Set a custom board size (At least 5 x 5 for guarenteed win)</li>
 <li> Try to have the knight touch every space with no backtracking! </li>
+<li> Use the auto-solver to find a solution to the puzzle </li>
 
 <h2> Guide </h2>
 An <b>X</b> denotes the current knight position <br>
@@ -25,5 +26,24 @@ Visited squares (*): [[3, 3], [1, 4], [2, 2]]
 Current Player Pos (X): [2, 2]
  ```
 
-<h1>Coming Soon</h1>
-<li>Automatic solution solver with numbered steps</li>
+<h2>Auto-Solver</h2>
+<b>WARNING:</b> Anything above 5x5 may take a very long time depending on your computing power <br>
+
+```
+Enter your board dimensions
+6 6
+Enter the knight's starting position
+1 2
+Do you want to see a solution to the puzzle? (y/n) y
+
+Found solution in 51.98 seconds!
+ ---------------------
+6|  9  6  11  22  25  4 |
+5|  12  21  8  5  32  23 |
+4|  7  10  33  24  3  26 |
+3|  20  13  2  29  16  31 |
+2|  1  34  15  18  27  36 |
+1|  14  19  28  35  30  17 |
+ ---------------------
+    1  2  3  4  5  6
+```
