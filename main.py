@@ -159,19 +159,14 @@ if solver == "y":  # Show the solution!
 
 elif solver == "n":  # User wants to solve it themselves
     while True:
-        if int(dim[0]) < 4 and int(dim[1]) < 4:  # Firstly, any dimensions below 4 are unsolvable (no 0 or 1 cases)
-            print("No solution exists!")
-            break
-
         board.curr_x = int(coords[0])  # If the move is valid, we can move curr_x and curr_y to the desired space
         board.curr_y = int(coords[1])
         board.add_to_visited_places()  # Then we can add this move to our visited places
         good_moves = board.get_valid_pos(board.curr_x, board.curr_y)  # Get valid moves for this space
         board.draw_board(good_moves)  # Draw board to communicate above info
-
         print("Good moves: " + str(good_moves))
         print("Visited squares: " + str(board.visited_places))
-
+        num_squares += 1
         if len(board.visited_places) == board.columns * board.rows:  # If every single place has a mark, win!
             print("What a great tour! Congratulations!")
             break
@@ -190,5 +185,4 @@ elif solver == "n":  # User wants to solve it themselves
             elif not search(good_moves, int(coords[0]), int(coords[1])):  # checks for valid space
                 print("Invalid move!", end="")
             else:
-                num_squares += 1
                 break
