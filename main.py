@@ -152,7 +152,12 @@ if solver == "y":  # Show the solution!
     start = time.perf_counter()
     if board.find_solution(int(coords[0]), int(coords[1]), 2):  # Found a solution
         stop = time.perf_counter()
-        print(f"\nFound solution in {stop - start:0.2f} seconds!")
+        time_took = round(stop - start, 2)
+        time_placeholder = "seconds"
+        if stop - start > 60:
+            time_took = time_took / 60
+            time_placeholder = "minutes"
+        print(f"\nFound solution in {time_took} {time_placeholder}!")
         board.draw_board(solved_board, True)
     else:  # Did not find a solution
         print("No solution exists!")
